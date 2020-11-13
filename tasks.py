@@ -165,7 +165,7 @@ def reports(c):
 #
 # Utilities
 #
-def checkupdate(src:str, dst:str) -> bool:
+def checkupdate(src, dst):
     """
     Check if file source file is older or destination file does not exists
     """
@@ -188,7 +188,7 @@ def git_branch():
         return None
 
 
-def git_has_version(tag:str) -> bool:
+def git_has_version(tag):
     subprocess.call(['git', 'pull', '--tags'])
 
     try:
@@ -199,7 +199,7 @@ def git_has_version(tag:str) -> bool:
         return False
 
 
-def safe_rm_rf(c, pattern:str):
+def safe_rm_rf(c, pattern):
     """
     Safely delete files
     """
