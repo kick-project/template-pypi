@@ -225,7 +225,7 @@ def touch(fname, times=None):
         os.utime(fname, times)
 
 
-def _vars(rel:bool=False):
+def _vars(rel=False):
     fmt_vars = {
         'PYPI_REPO': PYPI_REPO,
         'project': config["metadata"]["name"],
