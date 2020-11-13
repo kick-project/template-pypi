@@ -123,7 +123,7 @@ def install(c):
 
 
 @task(aliases=['upload'])
-def deploy(c, rel:bool=False):
+def deploy(c, rel=False):
     """
     Upload package to a PyPi server
     """
@@ -213,7 +213,7 @@ def safe_rm_rf(c, pattern):
         c.run("rm -rf {}".format(fullpath))
 
 
-def slash(text: str) -> str:
+def slash(text):
     """
     Replace slashes to backslashes on windows
     """
