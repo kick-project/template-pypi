@@ -147,6 +147,16 @@ def test(c):
 
 
 @task
+def release(c):
+    """
+    Perform actions required to release
+    """
+    c.run("git pull --tags")
+    c.run("git tag {version}".format(**config["metadata"]))
+    c.run("git push --tags")
+
+
+@task
 def reports(c):
     """
     Open reports
