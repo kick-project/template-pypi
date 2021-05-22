@@ -58,9 +58,9 @@ def deps(c):
     Lock packages to a version using pip compile
     """
     if not os.path.exists("requirements-setup.txt") or getctime("requirements-setup.in") > getctime("requirements-setup.txt"):
-        c.run("pip-compile --quiet --output-file=requirements-setup.txt requirements-setup.in")
+        c.run("pip-compile --output-file=requirements-setup.txt requirements-setup.in")
     if not os.path.exists("requirements.txt") or getctime("requirements.in") > getctime("requirements.txt"):
-        c.run("pip-compile --quiet --output-file=requirements.txt requirements.in")
+        c.run("pip-compile --output-file=requirements.txt requirements.in")
     c.run("pip install --quiet --requirement requirements-setup.txt")
     c.run("pip install --quiet --requirement requirements.txt")
 
@@ -82,7 +82,7 @@ def metadata(c):
     verfile = join(root, slash("src/${PROJECT_NAME}/metadata.py"))
     if not checkupdate(join(root, "setup.cfg"), verfile):
         return
-
+        
     fh = open(verfile, 'w')
     fh.write("""# This file is generated in task.py:version.
 # Do not manually edit.
@@ -171,11 +171,11 @@ def reports(c):
         webbrowser.open("file://" + abspath(slash(report)), new=new)
         if new > 0:
             new = 0
-
+    
 #
 # Utilities
 #
-def checkupdate(src, dst):
+def checkupdate(src:str, dst:str) -> bool:
     """
     Check if file source file is older or destination file does not exists
     """
@@ -199,6 +199,10 @@ def git_branch():
 
 
 def git_has_version(tag):
+    """
+    :param tag: Tag string
+    :rtype: bool
+    """
     subprocess.call(['git', 'pull', '--tags'])
 
     try:
@@ -223,7 +227,7 @@ def safe_rm_rf(c, pattern):
         c.run("rm -rf {}".format(fullpath))
 
 
-def slash(text):
+def slash(text: str) -> str:
     """
     Replace slashes to backslashes on windows
     """
